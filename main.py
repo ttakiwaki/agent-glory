@@ -31,6 +31,9 @@ class Client(commands.Bot):
         print("Ready!")
 
     async def on_ready(self):
+        await self.change_presence(
+        activity=discord.Activity(type=discord.ActivityType.listening, name="IVE")
+    )
         print(f"Logged on as {self.user}!")
 
     @tasks.loop(time=time(hour=0, minute=0, second=0, tzinfo=pytz.timezone("America/Vancouver")))
