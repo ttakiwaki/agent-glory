@@ -10,7 +10,7 @@ from datetime import datetime
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
-GUILD_ID = discord.Object(id=1236510922625777715)
+GUILD_ID = discord.Object(id=1489040034324811776)
 
 #Initializing JSON Name Storing
 def load_names():
@@ -35,12 +35,12 @@ class Names(commands.Cog):
         checkname = addname.lower()
         names = load_names()
         if checkname in names:
-            embed = discord.Embed(title=f"Name: **{addname}** already exists in file, name will not be added.", color=0x81a6c3)
+            embed = discord.Embed(title="❌ Name Already Exists", description=f"Name: **{addname}** already exists in file, name will not be added.", color=0xe74c3c)
             await interaction.response.send_message(embed=embed, ephemeral=True)
         else:
             names.append(checkname)
             save_names(names)
-            embed = discord.Embed(title=f"Added Name: **{addname}** to file.", color=0x81a6c3)
+            embed = discord.Embed(title="✅ Name Added", description=f"Added Name: **{addname}** to file.", color=0x2ecc71)
             await interaction.response.send_message(embed=embed, ephemeral=True)
 
     #Remove Name from 'name_stores.json'.
@@ -51,26 +51,29 @@ class Names(commands.Cog):
         if checkname in names:
             names.remove(checkname)
             save_names(names)
-            embed = discord.Embed(title=f"Removed Name: **{removename}** from the list.", color=0x81a6c3)
+            embed = discord.Embed(title="✅ Name Removed", description=f"Removed Name: **{removename}** from the list.", color=0x2ecc71)
             await interaction.response.send_message(embed=embed, ephemeral=True)
         else:
-            embed = discord.Embed(title=f"Name: **{removename}** does not exist in the file, and will not be removed.", color=0x81a6c3)
+            embed = discord.Embed(title="❌ Name Doesn't Exist", description=f"Name: **{removename}** does not exist in the file, and will not be removed.", color=0xe74c3c)
             await interaction.response.send_message(embed=embed, ephemeral=True)
 
     #Display Names from 'name_stores.json'.
-    @app_commands.command(name="displaynames", description="Display all names from name list")
+    @app_commands.command(name="displaynames", description="Exports a JSON file containing all names")
     async def displaynames(self, interaction: discord.Interaction):
-        names = load_names()
-        embed = discord.Embed(title=names, color=0x81a6c3)
-        await interaction.response.send_message(embed=embed, ephemeral=True)
+        await interaction.response.send_message(file=discord.File("name_stores.json"), ephemeral=True)
 
     #Pick random name from 'name_stores.json'.
     @app_commands.command(name="randomname", description="Picks a random name from name list")
     async def randomname(self, interaction: discord.Interaction):
         names = load_names()
         picked_name = random.choice(names)
-        embed = discord.Embed(title=picked_name, color=0x81a6c3)
+        embed = discord.Embed(title="🎲 Random Name",description=f"**{picked_name}**", color=0x89CFF0)
         await interaction.response.send_message(embed=embed, ephemeral=True)
+
+    #Test Command
+    @app_commands.command(name="testcommand", description="Test to see if Agent Glory is working")
+    async def testcommand(self, interaction: discord.Interaction):
+        await interaction.response.send_message("Agent Glory is online")
 
 
 async def setup(bot):   
