@@ -32,7 +32,7 @@ class Client(commands.Bot):
 
     async def on_ready(self):
         await self.change_presence(
-        activity=discord.Activity(type=discord.ActivityType.listening, name="IVE")
+        activity=discord.Activity(type=discord.ActivityType.listening, name="Listening to IVE")
     )
         print(f"Logged on as {self.user}!")
 
