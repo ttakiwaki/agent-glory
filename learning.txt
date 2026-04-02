@@ -1,0 +1,7 @@
+await means "wait for this to finish before moving on" — it's needed because talking to Discord over the internet takes time.
+
+https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html
+
+In main.py — you use @client.tree.command because you have direct access to the client object
+
+In a cog — you use @app_commands.command because you're inside a class and don't have access to client directly, so discord.py handles the registration for you when you load the cog
