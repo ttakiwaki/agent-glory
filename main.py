@@ -14,8 +14,8 @@ class Client(commands.Bot):
     async def setup_hook(self):
         self.tree.clear_commands(guild=GUILD_ID)
         await self.load_extension("cogs.names") #loads cog (calls the setup() function in "cogs.name")
-        #await self.tree.sync(guild=GUILD_ID) #Testing
-        await self.tree.sync(guild=GUILD_ID) #Global
+        await self.tree.sync(guild=GUILD_ID) #Testing
+        #await self.tree.sync(guild=GUILD_ID) #Global
         print("Ready!")
 
     async def on_ready(self):

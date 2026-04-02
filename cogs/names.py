@@ -35,11 +35,13 @@ class Names(commands.Cog):
         checkname = addname.lower()
         names = load_names()
         if checkname in names:
-            await interaction.response.send_message(f"Name: **{addname}** already exists in file, name will not be added.")
+            embed = discord.Embed(title=f"Name: **{addname}** already exists in file, name will not be added.", color=0x81a6c3)
+            await interaction.response.send_message(embed=embed, ephemeral=True)
         else:
             names.append(checkname)
             save_names(names)
-            await interaction.response.send_message(f"Added Name: **{addname}** to file.")
+            embed = discord.Embed(title=f"Added Name: **{addname}** to file.", color=0x81a6c3)
+            await interaction.response.send_message(embed=embed, ephemeral=True)
 
     #Remove Name from 'name_stores.json'.
     @app_commands.command(name="removename", description="Remove a name from the name list")
@@ -49,17 +51,29 @@ class Names(commands.Cog):
         if checkname in names:
             names.remove(checkname)
             save_names(names)
-            await interaction.response.send_message(f"Removed Name: **{removename}** from the list.")
+            embed = discord.Embed(title=f"Removed Name: **{removename}** from the list.", color=0x81a6c3)
+            await interaction.response.send_message(embed=embed, ephemeral=True)
         else:
-            await interaction.response.send_message(f"Name: **{removename}** does not exist in the file, and will not be removed.")
+            embed = discord.Embed(title=f"Name: **{removename}** does not exist in the file, and will not be removed.", color=0x81a6c3)
+            await interaction.response.send_message(embed=embed, ephemeral=True)
 
     #Display Names from 'name_stores.json'.
     @app_commands.command(name="displaynames", description="Display all names from name list")
     async def displaynames(self, interaction: discord.Interaction):
         names = load_names()
-        await interaction.response.send_message(names)
+        embed = discord.Embed(title=names, color=0x81a6c3)
+        await interaction.response.send_message(embed=embed, ephemeral=True)
 
-async def setup(bot):
+    #Pick random name from 'name_stores.json'.
+    @app_commands.command(name="randomname", description="Picks a random name from name list")
+    async def randomname(self, interaction: discord.Interaction):
+        names = load_names()
+        picked_name = random.choice(names)
+        embed = discord.Embed(title=picked_name, color=0x81a6c3)
+        await interaction.response.send_message(embed=embed, ephemeral=True)
+
+
+async def setup(bot):   
     cog = Names(bot)
-    #await bot.add_cog(cog, guilds = [GUILD_ID]) #Testing
-    await bot.add_cog(cog) #Global
+    await bot.add_cog(cog, guilds = [GUILD_ID]) #Testing
+    #await bot.add_cog(cog) #Global
