@@ -8,8 +8,8 @@ from datetime import timedelta
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
-#GUILD_ID = discord.Object(id=1489040034324811776) #Project Glory
-GUILD_ID = discord.Object(id=1236510922625777715) #Test Server
+GUILD_ID = discord.Object(id=1489040034324811776) #Project Glory
+#GUILD_ID = discord.Object(id=1236510922625777715) #Test Server
 
 #Discord Bot
 class Bounty(commands.Cog):

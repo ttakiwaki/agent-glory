@@ -11,8 +11,8 @@ import pytz
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
-#GUILD_ID = discord.Object(id=1489040034324811776) #Project Glory
-GUILD_ID = discord.Object(id=1236510922625777715) #Test Server
+GUILD_ID = discord.Object(id=1489040034324811776) #Project Glory
+#GUILD_ID = discord.Object(id=1236510922625777715) #Test Server
 
 def load_names():
     if os.path.exists('name_stores.json'):
