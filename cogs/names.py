@@ -78,5 +78,4 @@ class Names(commands.Cog):
 
 async def setup(bot):   
     cog = Names(bot)
-    await bot.add_cog(cog, guilds = [GUILD_ID]) #Testing
-    #await bot.add_cog(cog) #Global
+    await bot.add_cog(cog, guilds = [GUILD_ID])
