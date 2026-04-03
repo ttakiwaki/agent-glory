@@ -10,7 +10,8 @@ from datetime import datetime
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
-GUILD_ID = discord.Object(id=1489040034324811776)
+#GUILD_ID = discord.Object(id=1489040034324811776) #Project Glory
+GUILD_ID = discord.Object(id=1236510922625777715) #Test Server
 
 #Initializing JSON Name Storing
 def load_names():
@@ -74,6 +75,17 @@ class Names(commands.Cog):
     @app_commands.command(name="testcommand", description="Test to see if Agent Glory is working")
     async def testcommand(self, interaction: discord.Interaction):
         await interaction.response.send_message("Agent Glory is online")
+
+    #Search for name in 'name_stores.json'.
+    @app_commands.command(name="searchname", description="Search to check if a name is on the list")
+    async def searchname(self, interaction: discord.Interaction, searchname: str):
+        names = load_names()
+        if searchname in names:
+            embed = discord.Embed(title="✅ Name Exists", description=f"The name **{searchname.capitalize()}** is on the list.", color=0x2ecc71)
+            await interaction.response.send_message(embed=embed, ephemeral=True)
+        else:
+            embed = discord.Embed(title="❌ Name Doesn't Exist", description=f"Name: **{searchname.capitalize()}** does not exist on the list.", color=0xe74c3c)
+            await interaction.response.send_message(embed=embed, ephemeral=True)
 
 
 async def setup(bot):   

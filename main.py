@@ -11,7 +11,8 @@ import pytz
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
-GUILD_ID = discord.Object(id=1489040034324811776)
+#GUILD_ID = discord.Object(id=1489040034324811776) #Project Glory
+GUILD_ID = discord.Object(id=1236510922625777715) #Test Server
 
 def load_names():
     if os.path.exists('name_stores.json'):
@@ -25,6 +26,7 @@ class Client(commands.Bot):
     async def setup_hook(self):
         self.tree.clear_commands(guild=GUILD_ID)
         await self.load_extension("cogs.names") #loads cog (calls the setup() function in "cogs.name")
+        await self.load_extension("cogs.bounty") #loads cog (calls the setup() function in "cogs.bounty")
         await self.tree.sync(guild=GUILD_ID)
         self.daily_name.start()
         print("Ready!")
@@ -39,7 +41,7 @@ class Client(commands.Bot):
     async def daily_name(self):
         channel = self.get_channel(1489043508583989378)
         randomname = random.choice(load_names())
-        embed = discord.Embed(title="🗓️ Name of the day", description=f"Today's name is {randomname}!", color=0x89CFF0)
+        embed = discord.Embed(title="🗓️ Name of the day", description=f"Good Morning <@&1489043050565992459>. Today's name is **{randomname.lower().capitalize()}**!", color=0x89CFF0)
         await channel.send(embed=embed)
     
 intents = discord.Intents.default()
