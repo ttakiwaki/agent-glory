@@ -10,8 +10,8 @@ from datetime import datetime
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
-#GUILD_ID = discord.Object(id=1489040034324811776) #Project Glory
-GUILD_ID = discord.Object(id=1236510922625777715) #Test Server
+GUILD_ID = discord.Object(id=1489040034324811776) #Project Glory
+#GUILD_ID = discord.Object(id=1236510922625777715) #Test Server
 
 #Initializing JSON Name Storing
 def load_names():
